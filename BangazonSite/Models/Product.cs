@@ -45,13 +45,10 @@ namespace BangazonSite.Models
         [Display(Name = "Local Delivery")]
         public bool LocalDelivery { get; set; }
 
+        public ProductType ProductType { get; set; }
 
-        
-
-        
-       
-        // Need to add: relationships between ProductType and Product and relationships between OrderProducts and Products
-
+        public int ProductTypeId { get; set; }
+        public bool Active { get; set; }
 
     }
 }

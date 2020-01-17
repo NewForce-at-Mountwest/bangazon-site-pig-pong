@@ -8,6 +8,20 @@
   <ItemGroup>
     <Compile Remove="Data\Migrations\20200116104841_InitialMigration.cs" />
     <Compile Remove="Data\Migrations\20200116104841_InitialMigration.Designer.cs" />
+    <Compile Remove="Migrations\20200117163757_SeedData.cs" />
+    <Compile Remove="Migrations\20200117163757_SeedData.Designer.cs" />
+    <Compile Remove="Migrations\20200117184423_SeedDatatake2.cs" />
+    <Compile Remove="Migrations\20200117184423_SeedDatatake2.Designer.cs" />
+    <Compile Remove="Migrations\20200117184555_Seed-Data.cs" />
+    <Compile Remove="Migrations\20200117184555_Seed-Data.Designer.cs" />
+    <Compile Remove="Migrations\20200117193352_Seed-DataTake3.cs" />
+    <Compile Remove="Migrations\20200117193352_Seed-DataTake3.Designer.cs" />
+    <Compile Remove="Migrations\20200117193705_SeedDatatake4.cs" />
+    <Compile Remove="Migrations\20200117193705_SeedDatatake4.Designer.cs" />
+    <Compile Remove="Migrations\20200117194006_SeedDataTake5.cs" />
+    <Compile Remove="Migrations\20200117194006_SeedDataTake5.Designer.cs" />
+    <Compile Remove="Migrations\20200117194530_SeedDataTake6.cs" />
+    <Compile Remove="Migrations\20200117194530_SeedDataTake6.Designer.cs" />
   </ItemGroup>
 
 

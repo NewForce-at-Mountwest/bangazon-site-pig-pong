@@ -21,7 +21,9 @@ namespace BangazonSite.Models
         [Display(Name = "Street Address")]
         public string StreetAddress { get; set; }
 
-        public ICollection<Product> Products { get; set; }
+        public virtual ICollection<Product> Products { get; set; } 
+        public virtual ICollection<PaymentType> PaymentTypes { get; set; }
+        public virtual ICollection<Order> Orders { get; set; }
 
     }
 }

@@ -10,7 +10,7 @@ namespace BangazonSite.Models
     {
         public int Id { get; set; }
         [Required]
-        [StringLength(16, ErrorMessage = "Please Enter a valid 16 digit account number")]
+        //[StringLength(16, ErrorMessage = "Please Enter a valid 16 digit account number")]
         public long AcctNumber { get; set; }
         public string Name { get; set; }
         [Required]

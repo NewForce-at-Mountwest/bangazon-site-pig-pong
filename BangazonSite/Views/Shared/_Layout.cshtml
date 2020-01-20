@@ -1,4 +1,6 @@
-﻿<!DOCTYPE html>
+﻿@using Microsoft.AspNetCore.Identity
+@inject SignInManager<ApplicationUser> SignInManager
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -27,7 +29,12 @@
                         </li>
 
                     </ul>
-                    <button class="nav-item" asp-controller="SellAProduct" asp-action="Create">Sell A Product</button>
+                    @if (SignInManager.IsSignedIn(User))
+                    {
+                        <button class="btn btn-info" type="button"
+                                onclick="location.href='@Url.Action("Create", "Products")'">
+                            Sell A Product
+                        </button>}
                 </div>
             </div>
         </nav>

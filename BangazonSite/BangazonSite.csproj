@@ -22,6 +22,8 @@
     <Compile Remove="Migrations\20200117194006_SeedDataTake5.Designer.cs" />
     <Compile Remove="Migrations\20200117194530_SeedDataTake6.cs" />
     <Compile Remove="Migrations\20200117194530_SeedDataTake6.Designer.cs" />
+    <Compile Remove="Migrations\20200120161821_ProductTypeVM.cs" />
+    <Compile Remove="Migrations\20200120161821_ProductTypeVM.Designer.cs" />
   </ItemGroup>
 
 

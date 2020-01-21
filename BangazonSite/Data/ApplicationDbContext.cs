@@ -5,6 +5,7 @@ using BangazonSite.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using BangazonSite.Models.ViewModels;
 
 namespace BangazonSite.Data
 {
@@ -22,7 +23,8 @@ namespace BangazonSite.Data
         public DbSet<OrderProduct> OrderProducts { get; set; }
         public DbSet<ProductType> ProductTypes { get; set; }
         public DbSet<PaymentType> PaymentTypes { get; set; }
-
+        public object ProductType { get; internal set; }
+        public object Product { get; internal set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -292,5 +294,7 @@ namespace BangazonSite.Data
 
 
         }
+
+        public DbSet<BangazonSite.Models.ViewModels.ProductTypesViewModel> ProductTypesViewModel { get; set; }
     }
 }

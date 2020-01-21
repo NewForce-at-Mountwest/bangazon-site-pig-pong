@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using BangazonSite.Data;
 using BangazonSite.Models;
 using Microsoft.AspNetCore.Identity;
+using BangazonSite.Models.ViewModels;
 
 namespace BangazonSite.Controllers
 {
@@ -35,7 +36,7 @@ namespace BangazonSite.Controllers
                 products = products.Where(product => product.Title.ToLower().Contains(searchQuery)).ToList();
             }
             return View(products);
-            
+
         }
 
         // GET: Products/Details/5
@@ -67,7 +68,7 @@ namespace BangazonSite.Controllers
         }
 
         // POST: Products/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -103,7 +104,7 @@ namespace BangazonSite.Controllers
         }
 
         // POST: Products/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -173,6 +174,29 @@ namespace BangazonSite.Controllers
         private bool ProductExists(int id)
         {
             return _context.Products.Any(e => e.Id == id);
+        }
+
+        public async Task<IActionResult> Types()
+        {
+            ProductTypesViewModel vm = new ProductTypesViewModel();
+            //list of product types
+            var productTypes = _context.ProductTypes
+            //include the products
+            .Include(p => p.Products).ToList();
+            //I have alist of product types, need to convert to grouped list
+            var groupedProducts = new List<GroupedProducts>();
+            foreach (ProductType p in productTypes)
+            {
+                groupedProducts.Add(new GroupedProducts()
+                {
+                    TypeName = p.Name,
+                    ProductCount = p.Products.Count(),
+                    Products = p.Products.Take(3).ToList()
+                });
+            }
+
+            vm.GroupedProducts = groupedProducts;
+            return View(vm);
         }
     }
 }

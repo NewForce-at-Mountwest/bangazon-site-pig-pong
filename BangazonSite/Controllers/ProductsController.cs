@@ -9,6 +9,8 @@ using BangazonSite.Data;
 using BangazonSite.Models;
 using BangazonSite.Models.ViewModels;
 using Microsoft.AspNetCore.Identity;
+using System.IO;
+
 namespace BangazonSite.Controllers
 {
     public class ProductsController : Controller
@@ -75,9 +77,18 @@ namespace BangazonSite.Controllers
             if (ModelState.IsValid)
             {
                 var user = await GetCurrentUserAsync();
+                if (sellAProductViewModel.ImageFile != null)
+                {
+                    using (var memoryStream = new MemoryStream())
+                    {
+                        await sellAProductViewModel.ImageFile.CopyToAsync(memoryStream);
+                        sellAProductViewModel.Product.ProductImage = memoryStream.ToArray();
+                    }
+                };
+              
                 sellAProductViewModel.Product.UserId = user.Id;
                 _context.Add( sellAProductViewModel.Product);
-              
+             
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Details), new { id = sellAProductViewModel.Product.Id.ToString() });
             }

@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using BangazonSite.Data;
 using BangazonSite.Models;
 using Microsoft.AspNetCore.Identity;
+using BangazonSite.Models.ViewModels;
 
 namespace BangazonSite.Controllers
 {

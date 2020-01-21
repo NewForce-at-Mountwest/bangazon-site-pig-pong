@@ -7,8 +7,9 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using BangazonSite.Data;
 using BangazonSite.Models;
-using Microsoft.AspNetCore.Identity;
 using BangazonSite.Models.ViewModels;
+using Microsoft.AspNetCore.Identity;
+using System.IO;
 
 namespace BangazonSite.Controllers
 {
@@ -62,9 +63,14 @@ namespace BangazonSite.Controllers
         // GET: Products/Create
         public IActionResult Create()
         {
-            ViewData["ProductTypeId"] = new SelectList(_context.ProductTypes, "Id", "Id");
-            ViewData["UserId"] = new SelectList(_context.Users, "Id", "Id");
-            return View();
+            SellAProductViewModel sellAProductViewModel = new SellAProductViewModel();
+            sellAProductViewModel.ListOfProductTypes = _context.ProductTypes.Select(pt => new SelectListItem
+            {
+                Value = pt.Id.ToString(),
+                Text = pt.Name
+            }).ToList();
+
+            return View(sellAProductViewModel);
         }
 
         // POST: Products/Create
@@ -72,17 +78,32 @@ namespace BangazonSite.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,DateCreated,Description,Title,Price,Quantity,UserId,City,ProductImage,LocalDelivery,ProductTypeId,Active")] Product product)
+        public async Task<IActionResult> Create( SellAProductViewModel sellAProductViewModel)
         {
+            ModelState.Remove("product.UserId");
             if (ModelState.IsValid)
             {
-                _context.Add(product);
+                var user = await GetCurrentUserAsync();
+                if (sellAProductViewModel.ImageFile != null)
+                {
+                    using (var memoryStream = new MemoryStream())
+                    {
+                        await sellAProductViewModel.ImageFile.CopyToAsync(memoryStream);
+                        sellAProductViewModel.Product.ProductImage = memoryStream.ToArray();
+                    }
+                };
+
+                sellAProductViewModel.Product.UserId = user.Id;
+                _context.Add( sellAProductViewModel.Product);
+
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction(nameof(Details), new { id = sellAProductViewModel.Product.Id.ToString() });
             }
-            ViewData["ProductTypeId"] = new SelectList(_context.ProductTypes, "Id", "Id", product.ProductTypeId);
-            ViewData["UserId"] = new SelectList(_context.Users, "Id", "Id", product.UserId);
-            return View(product);
+            else
+            {
+
+            }
+            return View(sellAProductViewModel);
         }
 
         // GET: Products/Edit/5

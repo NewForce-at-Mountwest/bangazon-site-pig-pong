@@ -6,20 +6,24 @@
 
 <h1>Index</h1>
 
+@*<p>
+    <a asp-action="Create">Create New</a>
+</p>*@
 <table class="table">
     <thead>
         <tr>
-            <th>Categories</th>
+            <th></th>
         </tr>
     </thead>
     <tbody>
 @foreach (var item in Model) {
+    @foreach (var p in GroupedProducts) {
         <tr>
             <td>
-                @Html.DisplayFor(t => item.GroupedProducts.TypeName)
-               @Html.DisplayFor(c => item.GroupedProducts.ProductCount)
-            </td>
+                @Html.DisplayFor(p => p.prod)
+
+         </td>
         </tr>
-}
+    }}
     </tbody>
 </table>

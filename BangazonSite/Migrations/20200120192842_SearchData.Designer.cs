@@ -4,14 +4,16 @@ using BangazonSite.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace BangazonSite.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200120192842_SearchData")]
+    partial class SearchData
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -112,7 +114,8 @@ namespace BangazonSite.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<long>("AcctNumber")
-                        .HasColumnType("bigint");
+                        .HasColumnType("bigint")
+                        .HasMaxLength(16);
 
                     b.Property<bool>("Active")
                         .HasColumnType("bit");
@@ -612,13 +615,13 @@ namespace BangazonSite.Migrations
                         {
                             Id = "00000000-ffff-ffff-ffff-ffffffffffff",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "f13c85d0-dff9-4803-b2ed-d3764c2d7371",
+                            ConcurrencyStamp = "ae6711dc-2f21-43a5-89df-345b2a9004bc",
                             Email = "admin@admin.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMIN@ADMIN.COM",
                             NormalizedUserName = "ADMIN@ADMIN.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAELPQy92aZSv2Lg2iC+39pOvdmSH6VoUKhlS8nVhKnNvhKRxIjduoXB6E1oME9c8IUg==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEKcMT27sLLSLO2MSkyYMGmFqNWB2xgmotd+OxlHu/Um35uk0JeLXEqSM0kMufGcBXA==",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "7f434309-a4d9-48e9-9ebb-8803db794577",
                             TwoFactorEnabled = false,

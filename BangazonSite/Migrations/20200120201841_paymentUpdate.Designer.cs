@@ -4,14 +4,16 @@ using BangazonSite.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace BangazonSite.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200120201841_paymentUpdate")]
+    partial class paymentUpdate
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -189,9 +191,6 @@ namespace BangazonSite.Migrations
                     b.Property<double>("Price")
                         .HasColumnType("float");
 
-                    b.Property<int?>("ProductId")
-                        .HasColumnType("int");
-
                     b.Property<byte[]>("ProductImage")
                         .HasColumnType("varbinary(max)");
 
@@ -213,8 +212,6 @@ namespace BangazonSite.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("OrderId");
-
-                    b.HasIndex("ProductId");
 
                     b.HasIndex("ProductTypeId");
 
@@ -673,10 +670,6 @@ namespace BangazonSite.Migrations
                     b.HasOne("BangazonSite.Models.Order", null)
                         .WithMany("Products")
                         .HasForeignKey("OrderId");
-
-                    b.HasOne("BangazonSite.Models.Product", null)
-                        .WithMany("products")
-                        .HasForeignKey("ProductId");
 
                     b.HasOne("BangazonSite.Models.ProductType", "ProductType")
                         .WithMany("Products")

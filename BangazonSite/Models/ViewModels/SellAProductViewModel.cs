@@ -10,6 +10,7 @@ namespace BangazonSite.Models.ViewModels
     {
         public Product Product { get; set; }
         public List<SelectListItem> ListOfProductTypes { get; set; }
+        public Microsoft.AspNetCore.Http.IFormFile ImageFile { get; set; }
         public int SelectedProductTypeId { get; set; }
     }
 }

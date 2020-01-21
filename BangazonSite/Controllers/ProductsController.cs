@@ -9,26 +9,35 @@ using BangazonSite.Data;
 using BangazonSite.Models;
 using BangazonSite.Models.ViewModels;
 using Microsoft.AspNetCore.Identity;
+using System.IO;
+
 namespace BangazonSite.Controllers
 {
     public class ProductsController : Controller
     {
-        private readonly UserManager<ApplicationUser> _userManager;
         private readonly ApplicationDbContext _context;
-        public ProductsController(ApplicationDbContext context, UserManager<ApplicationUser> userManager)
+        private UserManager<ApplicationUser> _userManager;
+
+        public ProductsController(ApplicationDbContext context, UserManager<ApplicationUser> userManager
+            )
         {
             _context = context;
             _userManager = userManager;
         }
-        //private method to get user
+        // Private method to get current user
         private Task<ApplicationUser> GetCurrentUserAsync() => _userManager.GetUserAsync(HttpContext.User);
-
-
         // GET: Products
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string searchQuery)
         {
-            var applicationDbContext = _context.Products.Include(p => p.ProductType).Include(p => p.User);
-            return View(await applicationDbContext.ToListAsync());
+
+            var products = await _context.Products.Include(p => p.ProductType).Include(p => p.User).ToListAsync();
+            // typing into the search field to match a product title
+            if (searchQuery != null)
+            {
+                products = products.Where(product => product.Title.ToLower().Contains(searchQuery)).ToList();
+            }
+            return View(products);
+
         }
 
         // GET: Products/Details/5
@@ -69,7 +78,7 @@ namespace BangazonSite.Controllers
         }
 
         // POST: Products/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -79,15 +88,24 @@ namespace BangazonSite.Controllers
             if (ModelState.IsValid)
             {
                 var user = await GetCurrentUserAsync();
+                if (sellAProductViewModel.ImageFile != null)
+                {
+                    using (var memoryStream = new MemoryStream())
+                    {
+                        await sellAProductViewModel.ImageFile.CopyToAsync(memoryStream);
+                        sellAProductViewModel.Product.ProductImage = memoryStream.ToArray();
+                    }
+                };
+
                 sellAProductViewModel.Product.UserId = user.Id;
                 _context.Add( sellAProductViewModel.Product);
-              
+
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Details), new { id = sellAProductViewModel.Product.Id.ToString() });
             }
             else
             {
-               
+
             }
             return View(sellAProductViewModel);
         }
@@ -111,7 +129,7 @@ namespace BangazonSite.Controllers
         }
 
         // POST: Products/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -181,6 +199,29 @@ namespace BangazonSite.Controllers
         private bool ProductExists(int id)
         {
             return _context.Products.Any(e => e.Id == id);
+        }
+
+        public async Task<IActionResult> Types()
+        {
+            ProductTypesViewModel vm = new ProductTypesViewModel();
+            //list of product types
+            var productTypes = _context.ProductTypes
+            //include the products
+            .Include(p => p.Products).ToList();
+            //I have alist of product types, need to convert to grouped list
+            var groupedProducts = new List<GroupedProducts>();
+            foreach (ProductType p in productTypes)
+            {
+                groupedProducts.Add(new GroupedProducts()
+                {
+                    TypeName = p.Name,
+                    ProductCount = p.Products.Count(),
+                    Products = p.Products.Take(3).ToList()
+                });
+            }
+
+            vm.GroupedProducts = groupedProducts;
+            return View(vm);
         }
     }
 }

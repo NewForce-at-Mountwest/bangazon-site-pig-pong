@@ -51,5 +51,6 @@ namespace BangazonSite.Models
         public int ProductTypeId { get; set; }
         public bool Active { get; set; }
 
+        public List<Product> products { get; set; } = new List<Product>();
     }
 }

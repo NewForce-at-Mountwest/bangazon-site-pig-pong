@@ -4,21 +4,32 @@
     ViewData["Title"] = "Types";
 }
 
-<h1>Types</h1>
+    <table class="table">
+        <thead>
+            <tr>
+            <th>Categories</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+                @foreach (var item in Model.GroupedProducts)
+                {
+            <tr>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<div>
-    @foreach (var item in Model.GroupedProducts)
-    {
+                <td>
+                @item.TypeName (@item.ProductCount)
+                </td></tr><tr>
+                @foreach (var p in item.Products)
+                {
+            <td>
+                 
+                <a asp-action="Products/Details" asp-route-id="@p.Id"><p>@p.Title</p><br /></a>
 
-        <h2>@item.TypeName (@item.ProductCount)</h2>
-        foreach (var p in item.Products)
-        {
-            <p> @p.Title</p>
-        }
-    }
-    
-</div>
+</td>
+                }
+            </tr> 
+            }
 
+            
+        </tbody>
+    </table>

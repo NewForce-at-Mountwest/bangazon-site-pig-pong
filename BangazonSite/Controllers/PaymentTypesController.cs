@@ -29,7 +29,7 @@ namespace BangazonSite.Controllers
         {
             var currentUser = await _userManager.GetUserAsync(HttpContext.User);
 
-            var applicationDbContext = _context.PaymentTypes.Where(p => p.UserId == currentUser.Id && p.Active == true).Include(p => p.User);
+            var applicationDbContext = _context.PaymentTypes.Where(p => p.UserId == currentUser.Id).Include(p => p.User);
             return View(await applicationDbContext.ToListAsync());
         }
 
@@ -63,17 +63,18 @@ namespace BangazonSite.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(PaymentType paymentType)
+        public async Task<IActionResult> Create([Bind("AcctNumber,Name")] PaymentType paymentType)
         {
             
             // Remove User, and UserId from the ModelState 
             ModelState.Remove("User");
             ModelState.Remove("UserId");
 // Get current user from the db
-            var currentUser = await _userManager.GetUserAsync(HttpContext.User);
+            
 
             if (ModelState.IsValid)
             {
+                var currentUser = await _userManager.GetUserAsync(HttpContext.User);
                 paymentType.UserId = currentUser.Id;
                 _context.Add(paymentType);
                 await _context.SaveChangesAsync();

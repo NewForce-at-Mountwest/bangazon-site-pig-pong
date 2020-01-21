@@ -1,0 +1,25 @@
+﻿@model IEnumerable<BangazonSite.Models.ViewModels.ProductTypesViewModel>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Categories</th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(t => item.GroupedProducts.TypeName)
+               @Html.DisplayFor(c => item.GroupedProducts.ProductCount)
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

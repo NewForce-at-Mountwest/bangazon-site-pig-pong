@@ -22,6 +22,8 @@
     <Compile Remove="Migrations\20200117194006_SeedDataTake5.Designer.cs" />
     <Compile Remove="Migrations\20200117194530_SeedDataTake6.cs" />
     <Compile Remove="Migrations\20200117194530_SeedDataTake6.Designer.cs" />
+    <Compile Remove="Migrations\20200120161821_ProductTypeVM.cs" />
+    <Compile Remove="Migrations\20200120161821_ProductTypeVM.Designer.cs" />
   </ItemGroup>
 
 
@@ -29,6 +31,7 @@
     <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="3.1.0" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="3.1.0" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="3.1.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="3.1.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="3.1.0" />
     <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="3.1.0" />

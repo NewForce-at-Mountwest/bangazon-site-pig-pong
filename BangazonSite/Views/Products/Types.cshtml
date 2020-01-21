@@ -1,0 +1,24 @@
+﻿@model BangazonSite.Models.ViewModels.ProductTypesViewModel
+
+@{
+    ViewData["Title"] = "Types";
+}
+
+<h1>Types</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<div>
+    @foreach (var item in Model.GroupedProducts)
+    {
+
+        <h2>@item.TypeName (@item.ProductCount)</h2>
+        foreach (var p in item.Products)
+        {
+            <p> @p.Title</p>
+        }
+    }
+    
+</div>
+

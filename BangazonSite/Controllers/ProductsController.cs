@@ -166,6 +166,7 @@ namespace BangazonSite.Controllers
 
         public async Task<IActionResult> Types()
         {
+            ProductTypesViewModel vm = new ProductTypesViewModel();
             //list of product types
             var productTypes = _context.ProductTypes
             //include the products
@@ -181,7 +182,9 @@ namespace BangazonSite.Controllers
                     Products = p.Products.Take(3).ToList()
                 });
             }
-            return View(groupedProducts);
+
+            vm.GroupedProducts = groupedProducts; 
+            return View(vm);
         }
     }
 }

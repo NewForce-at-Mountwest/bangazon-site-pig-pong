@@ -4,43 +4,22 @@ using BangazonSite.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace BangazonSite.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200120201841_paymentUpdate")]
+    partial class paymentUpdate
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("ProductVersion", "3.1.0")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-            modelBuilder.Entity("BangazonSite.Models.GroupedProducts", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int>("ProductCount")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("ProductTypesViewModelId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("TypeName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ProductTypesViewModelId");
-
-                    b.ToTable("GroupedProducts");
-                });
 
             modelBuilder.Entity("BangazonSite.Models.Order", b =>
                 {
@@ -203,9 +182,6 @@ namespace BangazonSite.Migrations
                         .HasColumnType("nvarchar(255)")
                         .HasMaxLength(255);
 
-                    b.Property<int?>("GroupedProductsId")
-                        .HasColumnType("int");
-
                     b.Property<bool>("LocalDelivery")
                         .HasColumnType("bit");
 
@@ -214,9 +190,6 @@ namespace BangazonSite.Migrations
 
                     b.Property<double>("Price")
                         .HasColumnType("float");
-
-                    b.Property<int?>("ProductId")
-                        .HasColumnType("int");
 
                     b.Property<byte[]>("ProductImage")
                         .HasColumnType("varbinary(max)");
@@ -238,11 +211,7 @@ namespace BangazonSite.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("GroupedProductsId");
-
                     b.HasIndex("OrderId");
-
-                    b.HasIndex("ProductId");
 
                     b.HasIndex("ProductTypeId");
 
@@ -409,18 +378,6 @@ namespace BangazonSite.Migrations
                             Id = 3,
                             Name = "Energy Tools"
                         });
-                });
-
-            modelBuilder.Entity("BangazonSite.Models.ViewModels.ProductTypesViewModel", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.HasKey("Id");
-
-                    b.ToTable("ProductTypesViewModel");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -652,13 +609,13 @@ namespace BangazonSite.Migrations
                         {
                             Id = "00000000-ffff-ffff-ffff-ffffffffffff",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "47dd6f11-83d9-4422-ad8e-08bf8a4ba03f",
+                            ConcurrencyStamp = "f13c85d0-dff9-4803-b2ed-d3764c2d7371",
                             Email = "admin@admin.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMIN@ADMIN.COM",
                             NormalizedUserName = "ADMIN@ADMIN.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAENtZtC4UGPQjt99fcNHF7+C6XH4Znjw+N6B3CoE6MaG0Q3eBuXB8hyWWlL1GUnY1rw==",
+                            PasswordHash = "AQAAAAEAACcQAAAAELPQy92aZSv2Lg2iC+39pOvdmSH6VoUKhlS8nVhKnNvhKRxIjduoXB6E1oME9c8IUg==",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "7f434309-a4d9-48e9-9ebb-8803db794577",
                             TwoFactorEnabled = false,
@@ -667,13 +624,6 @@ namespace BangazonSite.Migrations
                             LastName = "admin",
                             StreetAddress = "123 Infinity Way"
                         });
-                });
-
-            modelBuilder.Entity("BangazonSite.Models.GroupedProducts", b =>
-                {
-                    b.HasOne("BangazonSite.Models.ViewModels.ProductTypesViewModel", null)
-                        .WithMany("GroupedProducts")
-                        .HasForeignKey("ProductTypesViewModelId");
                 });
 
             modelBuilder.Entity("BangazonSite.Models.Order", b =>
@@ -717,17 +667,9 @@ namespace BangazonSite.Migrations
 
             modelBuilder.Entity("BangazonSite.Models.Product", b =>
                 {
-                    b.HasOne("BangazonSite.Models.GroupedProducts", null)
-                        .WithMany("Products")
-                        .HasForeignKey("GroupedProductsId");
-
                     b.HasOne("BangazonSite.Models.Order", null)
                         .WithMany("Products")
                         .HasForeignKey("OrderId");
-
-                    b.HasOne("BangazonSite.Models.Product", null)
-                        .WithMany("products")
-                        .HasForeignKey("ProductId");
 
                     b.HasOne("BangazonSite.Models.ProductType", "ProductType")
                         .WithMany("Products")

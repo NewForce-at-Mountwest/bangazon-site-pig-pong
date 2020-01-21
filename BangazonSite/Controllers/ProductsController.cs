@@ -60,7 +60,11 @@ namespace BangazonSite.Controllers
                 Value = pt.Id.ToString(),
                 Text = pt.Name
             }).ToList();
-          
+            sellAProductViewModel.ListOfProductTypes.Insert(0, new SelectListItem()
+            {
+                Value = "0",
+                Text = "Please choose a Product Type"
+            });
             return View(sellAProductViewModel);
         }
 

@@ -36,19 +36,31 @@
 
                             <li class="form-group">
                                 <form asp-controller="Products" asp-action="Index">
-                                <input name="searchQuery" class="form-control" id="searchInput" aria-describedby="search" placeholder="Search Products">
+                                    <input name="searchQuery" class="form-control" id="searchInput" aria-describedby="search" placeholder="Search Products">
                                 </form>
 
                             </li>
 
                         }
-                    </ul>
-                    @if (SignInManager.IsSignedIn(User))
-                    {
+
+                        @if (SignInManager.IsSignedIn(User))
+                        {
+                    <li class="nav-item">
                         <button class="btn btn-info" type="button"
                                 onclick="location.href='@Url.Action("Create", "Products")'">
                             Sell A Product
-                        </button>}
+                        </button>
+                    </li>
+                    <li class="nav-item">
+                        <button class="btn btn-info" type="button"
+                                onclick="location.href='@Url.Action("Details", "Orders")'">
+                            Cart
+                        </button>
+                    </li>
+                        }
+                    
+                    
+                    </ul>
                 </div>
             </div>
         </nav>

@@ -60,7 +60,7 @@ namespace BangazonSite.Data
                 {
                     Id = 1,
                     UserId = "00000000-ffff-ffff-ffff-ffffffffffff",
-                    PaymentTypeId = 2
+                    PaymentTypeId = null
                 },
                   new Order()
                   {

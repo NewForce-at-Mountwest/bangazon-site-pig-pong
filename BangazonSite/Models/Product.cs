@@ -46,7 +46,8 @@ namespace BangazonSite.Models
         public bool LocalDelivery { get; set; }
 
         public ProductType ProductType { get; set; }
-
+        [Required]
+        [Range(1, int.MaxValue, ErrorMessage = "Please Select A Product Type")]
         public int ProductTypeId { get; set; }
         public bool Active { get; set; }
 

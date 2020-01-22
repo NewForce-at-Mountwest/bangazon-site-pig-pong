@@ -12,7 +12,7 @@ namespace BangazonSite.Models
         [Required]
         public string UserId { get; set; }
         public ApplicationUser User { get; set; }
-        public int PaymentTypeId { get; set; }
+        public int? PaymentTypeId { get; set; }
         public PaymentType PaymentType { get; set; }
         public List<Product> Products { get; set; } = new List<Product>();
         public List<OrderProduct> OrderProducts { get; set; } = new List<OrderProduct>();

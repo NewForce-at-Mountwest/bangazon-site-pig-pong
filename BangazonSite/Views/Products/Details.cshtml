@@ -66,6 +66,11 @@
                 <img class="userImg" src="@imgSrc" />
             </dd>
         }
+        <td>
+            <form>
+                <button class="btn btn-info" asp-action="AddToCart" asp-route-id="@Model.Id">Add to Cart</button>
+            </form>
+        </td>
 
 
 
@@ -79,22 +84,22 @@
 
 
 
-        <dt >
+        <dt>
             @Html.DisplayNameFor(model => model.LocalDelivery)
         </dt>
-        <dd >
+        <dd>
             @Html.DisplayFor(model => model.LocalDelivery)
         </dd>
-        <dt >
+        <dt>
             @Html.DisplayNameFor(model => model.ProductType)
         </dt>
-        <dd >
+        <dd>
             @Html.DisplayFor(model => model.ProductType.Id)
         </dd>
-        <dt >
+        <dt>
             @Html.DisplayNameFor(model => model.Active)
         </dt>
-        <dd >
+        <dd>
             @Html.DisplayFor(model => model.Active)
         </dd>
     </dl>

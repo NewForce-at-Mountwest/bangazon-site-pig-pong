@@ -4,14 +4,16 @@ using BangazonSite.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace BangazonSite.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200122150325_addpaymenttypeidnull")]
+    partial class addpaymenttypeidnull
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -45,6 +47,7 @@ namespace BangazonSite.Migrations
                         new
                         {
                             Id = 1,
+                            PaymentTypeId = 2,
                             UserId = "00000000-ffff-ffff-ffff-ffffffffffff"
                         },
                         new
@@ -611,13 +614,13 @@ namespace BangazonSite.Migrations
                         {
                             Id = "00000000-ffff-ffff-ffff-ffffffffffff",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "31679dda-897c-4a79-b008-170bf26bb9cb",
+                            ConcurrencyStamp = "5b2c98e7-e2c2-4c8b-8f67-4ecf71aa3f4e",
                             Email = "admin@admin.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMIN@ADMIN.COM",
                             NormalizedUserName = "ADMIN@ADMIN.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAEO9Q9xYI3pdFAmnpVbXMbQsOYbl+aaymS7cPrTGCe8BUU05D4QycSvEtAiA7RpZ0PA==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEH+HnKSfdh9KLO/GocBIfKTbX1JSpokXq8ZfjKS+rep+f/cwjwcBhqqxrOpMcs5x4Q==",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "7f434309-a4d9-48e9-9ebb-8803db794577",
                             TwoFactorEnabled = false,

@@ -232,7 +232,7 @@ namespace BangazonSite.Controllers
             var addToCart =  await _context.Orders
                 .Include(p => p.PaymentType)
                 .Include(p => p.User)
-                .FirstOrDefaultAsync(m => m.Id == id);
+               .FirstOrDefaultAsync(p => p.PaymentTypeId == null);
            
 
             if (addToCart == null)
@@ -253,7 +253,7 @@ namespace BangazonSite.Controllers
             };
             _context.OrderProducts.Add(op);
             await _context.SaveChangesAsync();
-            return View(addToCart);
+            return RedirectToAction("Details", "Orders");
         }
     }
 }

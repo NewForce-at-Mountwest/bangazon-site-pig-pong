@@ -220,18 +220,17 @@ namespace BangazonSite.Controllers
             return View(vm);
         }
         //method for adding product to cart. Check for open order, if they don't have a new order, "CREATE" new. If they do, use open order's Id
-        public IActionResult AddToCart(int? id)
+        public async Task<IActionResult> AddToCart(int id)
         {
 
-             if (id == null)
-            {
-                return NotFound();
-            }
-             var user =  _userManager.GetUserAsync(HttpContext.User);
-            var addToCart =  _context.Orders
+             
+             var user =  await _userManager.GetUserAsync(HttpContext.User);
+            var addToCart =  await _context.Orders
                 .Include(p => p.PaymentType)
                 .Include(p => p.User)
                 .FirstOrDefaultAsync(m => m.Id == id);
+           
+
             if (addToCart == null)
             {
                 addToCart = new Order
@@ -240,9 +239,16 @@ namespace BangazonSite.Controllers
                     PaymentTypeId = null
                 };
                 _context.Orders.Add(addToCart);
-                return Create();
+                
             }
 
+            OrderProduct op = new OrderProduct
+            {
+                OrderId = addToCart.Id,
+                ProductId = id
+            };
+            _context.OrderProducts.Add(op);
+            await _context.SaveChangesAsync();
             return View(addToCart);
         }
     }

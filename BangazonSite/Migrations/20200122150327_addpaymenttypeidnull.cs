@@ -40,7 +40,7 @@ namespace BangazonSite.Migrations
                 keyColumn: "Id",
                 keyValue: "00000000-ffff-ffff-ffff-ffffffffffff",
                 columns: new[] { "ConcurrencyStamp", "PasswordHash" },
-                values: new object[] { "5b2c98e7-e2c2-4c8b-8f67-4ecf71aa3f4e", "AQAAAAEAACcQAAAAEH+HnKSfdh9KLO/GocBIfKTbX1JSpokXq8ZfjKS+rep+f/cwjwcBhqqxrOpMcs5x4Q==" });
+                values: new object[] { "47e5f751-e238-4b39-84fb-780412c5bdbd", "AQAAAAEAACcQAAAAEDT+7KKnWbik20tVsi4ls9BCPcq+rzlLiY9btvUHr8TJmwn4bQaqXRHIS+oMh9P5HA==" });
 
             migrationBuilder.AddForeignKey(
                 name: "FK_Orders_PaymentTypes_PaymentTypeId",

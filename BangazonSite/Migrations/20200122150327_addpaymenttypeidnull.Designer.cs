@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BangazonSite.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20200122150325_addpaymenttypeidnull")]
+    [Migration("20200122150327_addpaymenttypeidnull")]
     partial class addpaymenttypeidnull
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -614,13 +614,13 @@ namespace BangazonSite.Migrations
                         {
                             Id = "00000000-ffff-ffff-ffff-ffffffffffff",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "5b2c98e7-e2c2-4c8b-8f67-4ecf71aa3f4e",
+                            ConcurrencyStamp = "47e5f751-e238-4b39-84fb-780412c5bdbd",
                             Email = "admin@admin.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMIN@ADMIN.COM",
                             NormalizedUserName = "ADMIN@ADMIN.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAEH+HnKSfdh9KLO/GocBIfKTbX1JSpokXq8ZfjKS+rep+f/cwjwcBhqqxrOpMcs5x4Q==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEDT+7KKnWbik20tVsi4ls9BCPcq+rzlLiY9btvUHr8TJmwn4bQaqXRHIS+oMh9P5HA==",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "7f434309-a4d9-48e9-9ebb-8803db794577",
                             TwoFactorEnabled = false,

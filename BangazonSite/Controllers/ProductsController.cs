@@ -223,5 +223,37 @@ namespace BangazonSite.Controllers
             vm.GroupedProducts = groupedProducts;
             return View(vm);
         }
+        //method for adding product to cart. Check for open order, if they don't have a new order, "CREATE" new. If they do, use open order's Id
+        public async Task<IActionResult> AddToCart(int id)
+        {
+
+             
+             var user =  await _userManager.GetUserAsync(HttpContext.User);
+            var addToCart =  await _context.Orders
+                .Include(p => p.PaymentType)
+                .Include(p => p.User)
+               .FirstOrDefaultAsync(p => p.PaymentTypeId == null);
+           
+
+            if (addToCart == null)
+            {
+                addToCart = new Order
+                {
+                    UserId = user.Id,
+                    PaymentTypeId = null
+                };
+                _context.Orders.Add(addToCart);
+                
+            }
+
+            OrderProduct op = new OrderProduct
+            {
+                OrderId = addToCart.Id,
+                ProductId = id
+            };
+            _context.OrderProducts.Add(op);
+            await _context.SaveChangesAsync();
+            return RedirectToAction("Details", "Orders");
+        }
     }
 }

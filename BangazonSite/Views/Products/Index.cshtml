@@ -34,9 +34,6 @@
                 @Html.DisplayNameFor(model => model.City)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.ProductImage)
-            </th>
-            <th>
                 @Html.DisplayNameFor(model => model.LocalDelivery)
             </th>
             <th>
@@ -45,7 +42,7 @@
             <th>
                 @Html.DisplayNameFor(model => model.Active)
             </th>
-            <th></th>
+           
         </tr>
     </thead>
     <tbody>
@@ -77,7 +74,7 @@
                 @Html.DisplayFor(modelItem => item.LocalDelivery)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.ProductType.Id)
+                @Html.DisplayFor(modelItem => item.ProductType.Name)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Active)
